@@ -8,4 +8,6 @@ import com.app.springcloud.entity.Coupon;
 @Repository
 public interface CouponRepo extends JpaRepository<Coupon, Long> {
 
+	Coupon findByCode(String code);
+
 }
