@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,11 +23,12 @@ public class CouponController {
 	private CouponRepo couponRepo;
 
 	@RequestMapping(value = "/coupon", method = RequestMethod.POST)
-	public ResponseEntity<Coupon> createCoupon(Coupon coupon) {
+	public ResponseEntity<Coupon> createCoupon(@RequestBody Coupon coupon) {
 		ResponseEntity<Coupon> responseEntity = null;
 		Coupon created = null;
 		try {
 			if(coupon != null) {
+				logger.info("<======================== Coupon : " + coupon.toString() + " ========================>");
 				created = couponRepo.save(coupon);
 				responseEntity = new ResponseEntity<Coupon>(created, HttpStatus.OK);
 			}

@@ -53,6 +53,11 @@ public class Coupon {
 	public void setExpirationDate(String expirationDate) {
 		this.expirationDate = expirationDate;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Coupon [id=" + id + ", code=" + code + ", discount=" + discount + ", expirationDate=" + expirationDate
+				+ "]";
+	}
 	
 }
