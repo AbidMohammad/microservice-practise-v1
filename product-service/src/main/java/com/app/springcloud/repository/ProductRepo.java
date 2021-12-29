@@ -8,4 +8,6 @@ import com.app.springcloud.entity.Product;
 @Repository
 public interface ProductRepo extends JpaRepository<Product, Long> {
 
+	Product findByName(String name);
+
 }
