@@ -16,6 +16,8 @@ import com.app.springcloud.entity.Product;
 import com.app.springcloud.repository.ProductRepo;
 import com.app.springcloud.restclients.CouponRestClient;
 
+import io.github.resilience4j.retry.annotation.Retry;
+
 @RestController
 @RequestMapping("/productapi")
 public class ProductController {
@@ -29,6 +31,7 @@ public class ProductController {
 	private CouponRestClient couponRestClient;
 	
 	@RequestMapping(value = "/product", method = RequestMethod.POST)
+	@Retry(name="product-api")
 	public ResponseEntity<Product> createProduct(@RequestBody Product product) {
 		ResponseEntity<Product> responseEntity = null;
 		ResponseEntity<Coupon> couponData = null;		
