@@ -31,7 +31,7 @@ public class ProductController {
 	private CouponRestClient couponRestClient;
 	
 	@RequestMapping(value = "/product", method = RequestMethod.POST)
-	@Retry(name="product-api")
+	@Retry(name="product-api", fallbackMethod = "handleError")
 	public ResponseEntity<Product> createProduct(@RequestBody Product product) {
 		ResponseEntity<Product> responseEntity = null;
 		ResponseEntity<Coupon> couponData = null;		
@@ -65,5 +65,12 @@ public class ProductController {
 		}		
 		return responseEntity;
 	}
+	
+	public ResponseEntity<Product> handleError(Product product, Exception exception){
+		logger.info("<============= Executing Fallback Method =============>")
+		return product;
+	}
+	
+	
 
 }
