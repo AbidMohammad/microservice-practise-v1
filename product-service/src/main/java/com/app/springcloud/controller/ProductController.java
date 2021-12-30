@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.app.springcloud.entity.Coupon;
 import com.app.springcloud.entity.Product;
 import com.app.springcloud.repository.ProductRepo;
+import com.app.springcloud.restclients.CouponRestClient;
 
 @RestController
 @RequestMapping("/productapi")
@@ -23,12 +25,20 @@ public class ProductController {
 	@Autowired
 	private ProductRepo productRepo;
 	
+	@Autowired
+	private CouponRestClient couponRestClient;
+	
 	@RequestMapping(value = "/product", method = RequestMethod.POST)
 	public ResponseEntity<Product> createProduct(@RequestBody Product product) {
 		ResponseEntity<Product> responseEntity = null;
+		ResponseEntity<Coupon> couponData = null;		
 		Product created = null;
+		Coupon coupon = null;
 		try {
 			if(product != null) {
+				couponData = couponRestClient.getCoupon(product.getCouponCode());
+				coupon = couponData.getBody();
+				product.setPrice(product.getPrice().subtract(coupon.getDiscount()));
 				created = productRepo.save(product);
 				responseEntity = new ResponseEntity<Product>(created, HttpStatus.OK);
 			}
