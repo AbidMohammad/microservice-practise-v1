@@ -67,8 +67,8 @@ public class ProductController {
 	}
 	
 	public ResponseEntity<Product> handleError(Product product, Exception exception){
-		logger.info("<============= Executing Fallback Method =============>")
-		return product;
+		logger.info("<============= Executing Fallback Method =============>");
+		return new ResponseEntity<Product>(product, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
 	
