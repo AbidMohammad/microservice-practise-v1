@@ -29,7 +29,7 @@ public class CouponController {
 		Coupon created = null;
 		try {
 			if(coupon != null) {
-				logger.info("<======================== Coupon : " + coupon.toString() + " ========================>");
+				logger.info("<===================================== Coupon : " + coupon.toString() + " =====================================>");
 				created = couponRepo.save(coupon);
 				responseEntity = new ResponseEntity<Coupon>(created, HttpStatus.OK);
 			}
@@ -46,6 +46,7 @@ public class CouponController {
 		ResponseEntity<Coupon> responseEntity = null;
 		try {
 			coupon = couponRepo.findByCode(code);
+			logger.info("<===================================== Coupon : " + coupon.toString() + " =====================================>");
 			responseEntity  = new ResponseEntity<Coupon>(coupon, HttpStatus.OK);
 		} catch(Exception exception) {
 			logger.error("Exception while saving Coupon Details : " + exception.getMessage());

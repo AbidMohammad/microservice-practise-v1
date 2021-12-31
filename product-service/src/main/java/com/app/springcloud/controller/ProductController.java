@@ -42,6 +42,7 @@ public class ProductController {
 				couponData = couponRestClient.getCoupon(product.getCouponCode());
 				coupon = couponData.getBody();
 				product.setPrice(product.getPrice().subtract(coupon.getDiscount()));
+				logger.info("<===================================== Product : " + product.toString() + " =====================================>");
 				created = productRepo.save(product);
 				responseEntity = new ResponseEntity<Product>(created, HttpStatus.OK);
 			}
@@ -58,6 +59,7 @@ public class ProductController {
 		ResponseEntity<Product> responseEntity = null;
 		try {
 			product = productRepo.findByName(name);
+			logger.info("<===================================== Product : " + product.toString() + " =====================================>");
 			responseEntity  = new ResponseEntity<Product>(product, HttpStatus.OK);
 		} catch(Exception exception) {
 			logger.error("Exception while saving Product Details : " + exception.getMessage());

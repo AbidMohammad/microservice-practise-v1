@@ -16,9 +16,9 @@ public class GatewayFilterService implements GlobalFilter {
 	
 	@Override
 	public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-		logger.info("<================= Request Details : " + exchange.getRequest().getBody() + " =================>");
+		logger.info("<===================================== Request Details : " + exchange.getRequest().getBody() + " =====================================>");
 		return chain.filter(exchange).then(Mono.fromRunnable(() -> {
-			logger.info("<================= Executing before returning Mono Object : " + exchange.getResponse() + " =================>");
+			logger.info("<===================================== Executing before returning Mono Object : " + exchange.getResponse() + " =====================================>");
 		}));
 	}
 
