@@ -18,7 +18,7 @@ public class ZuulProxyServiceApplication {
 	static Logger logger = LoggerFactory.getLogger(ZuulProxyServiceApplication.class);
 
 	public static void main(String[] args) {
-		logger.info("====================================== Starting ZuulProxyServiceApplication ======================================>");
+		logger.info("<====================================== Starting ZuulProxyServiceApplication ======================================>");
 		SpringApplication.run(ZuulProxyServiceApplication.class, args);
 	}
 
