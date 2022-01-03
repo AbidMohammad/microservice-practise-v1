@@ -30,8 +30,9 @@ public class ProductController {
 	@Autowired
 	private CouponRestClient couponRestClient;
 	
+	@HystrixCommand(fallbackMethod = "handleError")
 	@RequestMapping(value = "/product", method = RequestMethod.POST)
-	@Retry(name="product-api", fallbackMethod = "handleError")
+	//@Retry(name="product-api", fallbackMethod = "handleError")
 	public ResponseEntity<Product> createProduct(@RequestBody Product product) {
 		ResponseEntity<Product> responseEntity = null;
 		ResponseEntity<Coupon> couponData = null;		
